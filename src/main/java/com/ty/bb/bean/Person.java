@@ -1,12 +1,16 @@
 package com.ty.bb.bean;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "person")
 @Data
+@Component
 public class Person {
+    @Value("${person.name}")
     private String name;
+    @Value("25")
     private Integer age;
 
     public String getName() {

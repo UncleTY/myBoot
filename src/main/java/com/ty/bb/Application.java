@@ -8,7 +8,6 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableCaching
-@EnableConfigurationProperties(Person.class)
 public class Application {
     public static void main(String[] args) {
        SpringApplication.run(Application.class,args);
