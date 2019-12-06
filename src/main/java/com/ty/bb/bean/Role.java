@@ -21,6 +21,4 @@ public class Role implements Serializable {
     private String role_name;
     @Column(name="remark")
     private String remark;
-    @Column(name="modified_time")
-    private Timestamp modified_time;
 }

@@ -1,6 +1,8 @@
 package com.ty.bb.controller;
 
-import com.ty.bb.bean.Person;
+import com.ty.bb.bean.PersonDO;
+import com.ty.bb.bean.PersonDTO;
+import com.ty.bb.converter.PersonConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +14,15 @@ public class HelloController {
     @Value("${bb.name}")
     private String name;
     @Autowired
-    private Person person;
+    private PersonConverter personConverter;
 
     @RequestMapping(value = "/getPerson", method = RequestMethod.GET)
-    public Person getPerson() {
-        return person;
+    public PersonDO getPersonDO() {
+        PersonDTO personDTO = new PersonDTO();
+        personDTO.setAge(23);
+        personDTO.setName("VV");
+        PersonDO personDO = personConverter.toDO(personDTO);
+        return personDO;
     }
 
     @RequestMapping("/")
