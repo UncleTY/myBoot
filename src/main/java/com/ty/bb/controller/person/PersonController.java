@@ -1,8 +1,8 @@
-package com.ty.bb.controller;
+package com.ty.bb.controller.person;
 
-import com.ty.bb.bean.PersonDO;
-import com.ty.bb.bean.PersonDTO;
-import com.ty.bb.converter.PersonConverter;
+import com.ty.bb.bean.person.PersonDO;
+import com.ty.bb.bean.person.PersonDTO;
+import com.ty.bb.converter.person.PersonConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
+public class PersonController {
     @Value("${bb.name}")
     private String name;
     @Autowired

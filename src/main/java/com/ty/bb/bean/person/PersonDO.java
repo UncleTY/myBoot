@@ -1,4 +1,4 @@
-package com.ty.bb.bean;
+package com.ty.bb.bean.person;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

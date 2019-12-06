@@ -1,9 +1,9 @@
-package com.ty.bb.controller;
+package com.ty.bb.controller.role;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.ty.bb.bean.Role;
-import com.ty.bb.service.RoleService;
+import com.ty.bb.bean.role.Role;
+import com.ty.bb.service.role.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
