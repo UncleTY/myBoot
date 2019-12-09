@@ -15,6 +15,7 @@ public class RoleService {
     private RoleRepository roleRepository;
 
     public List<Role> listRole() {
-        return roleRepository.selectAll();
+        List<Role> roleList = roleRepository.selectAll();
+        return roleList;
     }
 }
