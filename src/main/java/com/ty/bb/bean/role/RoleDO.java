@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @Table(name="bg_trole")
-public class Role implements Serializable {
+public class RoleDO implements Serializable {
     @Id
     @Column(name="company_id")
     private String company_id;
