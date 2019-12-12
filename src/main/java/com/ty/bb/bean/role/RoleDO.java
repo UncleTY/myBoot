@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 @SuppressWarnings("serial")
 @Data
-@Entity
 @Table(name="bg_trole")
 public class RoleDO implements Serializable {
     @Id

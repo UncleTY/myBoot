@@ -28,8 +28,8 @@ public class PersonController {
     }
 
     @RequestMapping("/")
-    public String sayHello(String name) {
+    public Result<String> sayHello(String name) {
         // 注意是哪个name 参数还是属性
-        return "Hello " + this.name;
+        return ResultUtil.success("Hello " + this.name);
     }
 }
