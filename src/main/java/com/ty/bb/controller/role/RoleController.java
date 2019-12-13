@@ -6,28 +6,28 @@ import com.ty.bb.bean.result.Result;
 import com.ty.bb.bean.role.RoleDO;
 import com.ty.bb.bean.role.RoleDTO;
 import com.ty.bb.bean.role.RoleQuery;
+import com.ty.bb.converter.role.RoleConverter;
 import com.ty.bb.service.role.RoleService;
 import com.ty.bb.utils.ResultUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class RoleController {
     @Resource
     private RoleService roleService;
+    @Resource
+    private RoleConverter roleConverter;
 
     @GetMapping("/listRole")
-    public Result<Page<RoleDO>> listRole(RoleQuery roleQuery) {
+    public Result<Page<RoleDTO>> listRole(RoleQuery roleQuery) {
         PageHelper.startPage(0, 10);
         roleQuery.setCompany_id("9999");
-        Page<RoleDO> page = (Page<RoleDO>) roleService.listRole(roleQuery);
-        System.out.println("当前页码：" + page.getPageNum());
-        System.out.println("每页记录条数：" + page.getPageSize());
-        System.out.println("总记录数：" + page.getTotal());
-        System.out.println("总页数：" + page.getPages());
-        return ResultUtil.success(page);
+        List<RoleDO> roleDOList = roleService.listRole(roleQuery);
+        return ResultUtil.success(roleConverter.toDTOPage(roleDOList));
     }
 
     @GetMapping("/queryRole")
