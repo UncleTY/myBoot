@@ -7,11 +7,11 @@ import com.ty.bb.bean.role.RoleQuery;
 import java.util.List;
 
 public interface RoleService {
-    public List<RoleDO> listRole(RoleQuery roleQuery);
+    List<RoleDO> listRole(RoleQuery roleQuery);
 
-    public RoleDTO queryRole(RoleQuery roleQuery);
+    RoleDTO queryRole(RoleQuery roleQuery);
 
-    public RoleDTO queryRoleByRoleCode(RoleQuery roleQuery);
+    RoleDTO queryRoleByRoleCode(RoleQuery roleQuery);
 
     void updateRoleCode(RoleDTO roleDTO);
 }

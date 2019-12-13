@@ -20,9 +20,8 @@ public class RoleController {
 
     @GetMapping("/listRole")
     public Result<Page<RoleDO>> listRole(RoleQuery roleQuery) {
-        PageHelper.startPage(2, 10);
+        PageHelper.startPage(0, 10);
         roleQuery.setCompany_id("9999");
-        roleQuery.setRole_code("789789");
         Page<RoleDO> page = (Page<RoleDO>) roleService.listRole(roleQuery);
         System.out.println("当前页码：" + page.getPageNum());
         System.out.println("每页记录条数：" + page.getPageSize());

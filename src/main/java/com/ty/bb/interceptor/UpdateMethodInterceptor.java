@@ -4,21 +4,18 @@ import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Map;
+import java.util.Properties;
 
 @Component
 @Intercepts({
         @Signature(method = "update", type = Executor.class, args = {MappedStatement.class, Object.class})
 })
 public class UpdateMethodInterceptor implements Interceptor {
-
-    private static final Logger log = LoggerFactory.getLogger(UpdateMethodInterceptor.class);
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

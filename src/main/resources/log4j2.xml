@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <properties>
+        <!-- 文件输出格式 -->
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} |-%-5level [%thread] %c [%L] -| %msg%n</property>
+    </properties>
+
+    <appenders>
+        <Console name="CONSOLE" target="system_out">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+
+        <RollingFile name="RollingFileInfo" fileName="./logs/info.log"
+                     filePattern="./logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+        <RollingFile name="RollingFileWarn" fileName="./logs/warn.log"
+                     filePattern="./logs/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="WARN"/>
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <Async name="AsyncCONSOLE">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="RollingFileWarn"/>
+        </Async>
+
+        <!--<Kafka name="kafkaTraceLogger" topic="apm">-->
+        <!--<PatternLayout pattern="%msg"/>-->
+        <!--<Property name="bootstrap.servers">10.20.35.225:9092</Property>-->
+        <!--</Kafka>-->
+        <!--<Async name="AsyncKafkaTraceLogger">-->
+        <!--<AppenderRef ref="kafkaTraceLogger" />-->
+        <!--</Async>-->
+    </appenders>
+
+    <loggers>
+        <!--过滤掉spring和hibernate的一些无用的debug信息-->
+        <logger name="org.springframework" level="INFO">
+        </logger>
+        <logger name="org.elasticsearch" level="INFO">
+        </logger>
+        <logger name="com.jd.jsf.gd" level="warn">
+        </logger>
+        <logger name="org.mybatis" level="INFO">
+        </logger>
+        <!-- 将业务dao接口填写进去,并用控制台输出即可 -->
+        <logger name="com.ty.bb.mapper" level="debug" additivity="true">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+        </logger>
+
+        <root level="info">
+            <AppenderRef ref="AsyncCONSOLE"/>
+        </root>
+    </loggers>
+
+</configuration>

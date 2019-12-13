@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ty.bb.mapper.role.RoleMapper">
+    <select id="listRole" resultType="com.ty.bb.bean.role.RoleDO">
+        select * from bg_trole
+        where company_id = #{company_id}
+        <if test='role_code != null and role_code != ""'>
+            and instr(role_code, #{role_code}) > 0
+        </if>
+    </select>
+
+    <select id="queryRoleByCode" resultType="com.ty.bb.bean.role.RoleDO">
+        SELECT * FROM bg_trole WHERE company_id = #{company_id} AND role_code = #{role_code}
+    </select>
+</mapper>
