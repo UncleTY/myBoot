@@ -21,6 +21,8 @@ public class RoleController {
     @GetMapping("/listRole")
     public Result<Page<RoleDO>> listRole(RoleQuery roleQuery) {
         PageHelper.startPage(2, 10);
+        roleQuery.setCompany_id("9999");
+        roleQuery.setRole_code("789789");
         Page<RoleDO> page = (Page<RoleDO>) roleService.listRole(roleQuery);
         System.out.println("当前页码：" + page.getPageNum());
         System.out.println("每页记录条数：" + page.getPageSize());
@@ -38,9 +40,19 @@ public class RoleController {
 
     @GetMapping("/queryRoleCode")
     public Result<RoleDTO> queryRoleCode(RoleQuery roleQuery) {
+        roleQuery.setCompany_id("9999");
         roleQuery.setRole_code("789789");
         RoleDTO roleDTO = roleService.queryRoleByRoleCode(roleQuery);
         return ResultUtil.success(roleDTO);
+    }
+
+    @GetMapping("/updateRoleCode")
+    public Result updateRoleCode(RoleDTO roleDTO) {
+        roleDTO.setCompany_id("9999");
+        roleDTO.setRole_code("789789");
+        roleDTO.setRole_name("6879789");
+        roleService.updateRoleCode(roleDTO);
+        return ResultUtil.success();
     }
 
 }

@@ -6,7 +6,6 @@ import com.ty.bb.bean.role.RoleQuery;
 import com.ty.bb.converter.role.RoleConverter;
 import com.ty.bb.mapper.role.RoleMapper;
 import com.ty.bb.service.role.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -17,14 +16,14 @@ import java.util.List;
 @CacheConfig(cacheNames = "role")
 @Service
 public class RoleServiceImpl implements RoleService {
-    @Autowired
+    @Resource
     private RoleConverter roleConverter;
-    @Autowired
+    @Resource
     private RoleMapper roleMapper;
 
     @Override
     public List<RoleDO> listRole(RoleQuery roleQuery) {
-        List<RoleDO> roleList = roleMapper.selectAll();
+        List<RoleDO> roleList = roleMapper.listRole(roleQuery);
         return roleList;
     }
 
@@ -39,8 +38,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDTO queryRoleByRoleCode(RoleQuery roleQuery) {
-        RoleDTO roleDTO = roleMapper.queryRoleByRoleCode(roleQuery);
-        return roleDTO;
+        RoleDO roleDO = roleMapper.queryRoleByCode(roleQuery);
+        return roleConverter.toDTO(roleDO);
+    }
+
+    @Override
+    public void updateRoleCode(RoleDTO roleDTO) {
+        roleMapper.updateByPrimaryKey(roleConverter.toDO(roleDTO));
     }
 
 }

@@ -12,4 +12,6 @@ public interface RoleService {
     public RoleDTO queryRole(RoleQuery roleQuery);
 
     public RoleDTO queryRoleByRoleCode(RoleQuery roleQuery);
+
+    void updateRoleCode(RoleDTO roleDTO);
 }
